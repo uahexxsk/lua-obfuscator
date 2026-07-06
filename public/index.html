@@ -3,84 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lua Obfuscator - Bảo vệ mã nguồn Lua</title>
+    <meta name="description" content="🔐 Lua Obfuscator - Bảo vệ mã nguồn Lua với mã hoá chuỗi, làm mờ tên biến và kiểm soát luồng nâng cao">
+    <meta name="keywords" content="lua, obfuscator, encryption, security, code protection">
+    <title>🔐 Lua Obfuscator Pro - Bảo vệ Mã Nguồn</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23667eea'>🔐</text></svg>">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>🔐 Lua Obfuscator</h1>
-            <p>Bảo vệ mã nguồn Lua với mã hoá chuỗi và che giấu tên</p>
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🔐</span>
+                    <h1>Lua Obfuscator Pro</h1>
+                </div>
+                <p class="tagline">Bảo vệ mã nguồn Lua với công nghệ mã hoá nâng cao</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">⚡</span>
+                        <span>Xử lý nhanh</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🔒</span>
+                        <span>Bảo mật cao</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">✨</span>
+                        <span>Dễ sử dụng</span>
+                    </div>
+                </div>
+            </div>
         </header>
 
         <div class="main-content">
             <!-- Left Panel - Upload & Options -->
             <div class="left-panel">
-                <div class="upload-section">
-                    <h2>📤 Tải lên File Lua</h2>
+                <!-- Upload Section -->
+                <div class="card upload-card">
+                    <div class="card-header">
+                        <h2>
+                            <span class="icon">📁</span>
+                            Tải lên File Lua
+                        </h2>
+                        <p class="card-subtitle">Chọn file .lua để bảo vệ</p>
+                    </div>
+                    
                     <div class="drop-zone" id="dropZone">
-                        <svg class="upload-icon" viewBox="0 0 24 24">
-                            <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2m0 2a8 8 0 100 16 8 8 0 000-16m-1 7V7h2v4h3l-4 4-4-4h3z"/>
+                        <svg class="upload-icon" viewBox="0 0 24 24" width="60" height="60">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor"/>
                         </svg>
-                        <p>Kéo thả file Lua vào đây</p>
-                        <p class="or">hoặc</p>
-                        <label for="fileInput" class="btn btn-primary">Chọn file</label>
+                        <p class="drop-text">Kéo thả file Lua vào đây</p>
+                        <p class="drop-or">hoặc</p>
+                        <label for="fileInput" class="btn btn-primary">
+                            <span class="btn-icon">📂</span>
+                            Chọn file
+                        </label>
                         <input type="file" id="fileInput" accept=".lua" hidden>
+                        <p class="file-info">Kích thước tối đa: 10MB</p>
+                    </div>
+                    
+                    <div class="file-preview" id="filePreview" style="display:none;">
+                        <div class="preview-item">
+                            <span class="preview-icon">📄</span>
+                            <div class="preview-info">
+                                <p class="preview-name" id="previewName"></p>
+                                <p class="preview-size" id="previewSize"></p>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-secondary" id="changFileBtn">
+                            <span>🔄</span> Thay đổi file
+                        </button>
                     </div>
                 </div>
 
-                <div class="options-section">
-                    <h2>⚙️ Tùy chọn</h2>
-                    <label class="checkbox">
-                        <input type="checkbox" id="encryptStrings" checked>
-                        <span>Mã hoá chuỗi</span>
-                    </label>
-                    <label class="checkbox">
-                        <input type="checkbox" id="obfuscateNames" checked>
-                        <span>Làm mờ tên biến/hàm</span>
-                    </label>
-                    <label class="checkbox">
-                        <input type="checkbox" id="controlFlow" checked>
-                        <span>Kiểm soát luồng</span>
-                    </label>
-                    <label class="checkbox">
-                        <input type="checkbox" id="removeComments" checked>
-                        <span>Xoá bình luận</span>
-                    </label>
-                    <label class="checkbox">
-                        <input type="checkbox" id="removeWhitespace" checked>
-                        <span>Xoá khoảng trắng</span>
-                    </label>
+                <!-- Options Section -->
+                <div class="card options-card">
+                    <div class="card-header">
+                        <h2>
+                            <span class="icon">⚙️</span>
+                            Tùy chọn Obfuscation
+                        </h2>
+                        <p class="card-subtitle">Chọn các tính năng bảo vệ</p>
+                    </div>
+
+                    <div class="options-grid">
+                        <label class="checkbox-label">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="encryptStrings" class="checkbox-input" checked>
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <div class="checkbox-content">
+                                <span class="checkbox-title">🔐 Mã hoá chuỗi</span>
+                                <span class="checkbox-desc">Mã hoá tất cả text trong code</span>
+                            </div>
+                        </label>
+
+                        <label class="checkbox-label">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="obfuscateNames" class="checkbox-input" checked>
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <div class="checkbox-content">
+                                <span class="checkbox-title">🎭 Làm mờ tên biến</span>
+                                <span class="checkbox-desc">Đổi tên thành ký tự ngẫu nhiên</span>
+                            </div>
+                        </label>
+
+                        <label class="checkbox-label">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="controlFlow" class="checkbox-input" checked>
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <div class="checkbox-content">
+                                <span class="checkbox-title">🌀 Kiểm soát luồng</span>
+                                <span class="checkbox-desc">Thêm code giả để làm phức tạp</span>
+                            </div>
+                        </label>
+
+                        <label class="checkbox-label">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="removeComments" class="checkbox-input" checked>
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <div class="checkbox-content">
+                                <span class="checkbox-title">🗑️ Xoá bình luận</span>
+                                <span class="checkbox-desc">Loại bỏ tất cả bình luận code</span>
+                            </div>
+                        </label>
+
+                        <label class="checkbox-label">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="removeWhitespace" class="checkbox-input" checked>
+                                <span class="checkbox-custom"></span>
+                            </div>
+                            <div class="checkbox-content">
+                                <span class="checkbox-title">📦 Nén code</span>
+                                <span class="checkbox-desc">Xoá khoảng trắng không cần thiết</span>
+                            </div>
+                        </label>
+                    </div>
                 </div>
 
+                <!-- Action Button -->
                 <button id="obfuscateBtn" class="btn btn-success btn-lg" style="display:none;">
-                    🚀 Obfuscate
+                    <span class="btn-icon">🚀</span>
+                    <span>Bắt đầu Obfuscate</span>
                 </button>
 
-                <div class="status" id="status"></div>
+                <!-- Status Message -->
+                <div class="alert" id="status" style="display:none;"></div>
             </div>
 
             <!-- Right Panel - Code Preview -->
             <div class="right-panel">
-                <div class="code-section">
-                    <div class="code-header">
-                        <h2>👁️ Preview Code</h2>
-                        <button id="copyBtn" class="btn btn-sm" style="display:none;">📋 Copy</button>
+                <!-- Code Section -->
+                <div class="card code-card">
+                    <div class="card-header">
+                        <h2>
+                            <span class="icon">👁️</span>
+                            Xem trước Code
+                        </h2>
+                        <div class="code-actions">
+                            <button id="copyBtn" class="btn btn-sm" style="display:none;" title="Copy code">
+                                <span>📋</span>
+                                Copy
+                            </button>
+                            <button id="downloadBtn" class="btn btn-sm btn-primary" style="display:none;" title="Tải file">
+                                <span>⬇️</span>
+                                Tải
+                            </button>
+                        </div>
                     </div>
-                    <textarea id="codePreview" readonly placeholder="Mã obfuscate sẽ hiển thị ở đây..."></textarea>
+
+                    <div class="code-info">
+                        <div class="info-item" id="codeStats" style="display:none;">
+                            <span class="info-label">Kích thước:</span>
+                            <span class="info-value">
+                                <span id="originalSize">0</span>B → <span id="obfuscatedSize">0</span>B
+                            </span>
+                        </div>
+                    </div>
+
+                    <textarea id="codePreview" readonly placeholder="Mã code sẽ hiển thị ở đây sau khi obfuscate..."></textarea>
                 </div>
 
-                <button id="downloadBtn" class="btn btn-download btn-lg" style="display:none;">
-                    ⬇️ Tải file Obfuscate
-                </button>
+                <!-- Features Section -->
+                <div class="card features-card">
+                    <h3>📊 Tiến trình</h3>
+                    <div class="progress-list">
+                        <div class="progress-item" id="progress-upload" style="display:none;">
+                            <span class="progress-icon">✓</span>
+                            <span class="progress-text">File tải lên thành công</span>
+                        </div>
+                        <div class="progress-item" id="progress-encrypt" style="display:none;">
+                            <span class="progress-icon">✓</span>
+                            <span class="progress-text">Mã hoá chuỗi hoàn tất</span>
+                        </div>
+                        <div class="progress-item" id="progress-obfuscate" style="display:none;">
+                            <span class="progress-icon">✓</span>
+                            <span class="progress-text">Làm mờ tên biến hoàn tất</span>
+                        </div>
+                        <div class="progress-item" id="progress-flow" style="display:none;">
+                            <span class="progress-icon">✓</span>
+                            <span class="progress-text">Kiểm soát luồng hoàn tất</span>
+                        </div>
+                        <div class="progress-item" id="progress-done" style="display:none;">
+                            <span class="progress-icon">🎉</span>
+                            <span class="progress-text">Hoàn tất! Sẵn sàng tải</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay" style="display:none;">
-        <div class="spinner"></div>
-        <p>Đang xử lý...</p>
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p class="loading-text">Đang xử lý...</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>🔐 Lua Obfuscator Pro v1.0 | Bảo vệ mã nguồn một cách an toàn</p>
+            <p class="footer-note">⚠️ Obfuscation là bảo vệ cơ bản, không thay thế cho mã hoá thực sự</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>

@@ -34,21 +34,29 @@ if (!fs.existsSync('uploads')) {
   fs.mkdirSync('uploads');
 }
 
+// Routes
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // API Routes
 app.post('/api/obfuscate', upload.single('file'), (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'No file provided' });
+      return res.status(400).json({ error: 'Không có file được tải lên' });
     }
 
     const code = req.file.buffer.toString('utf-8');
-    const obfuscator = new Obfuscator(code, req.body.options || {});
+    const options = req.body.options ? JSON.parse(req.body.options) : {};
+    const obfuscator = new Obfuscator(code, options);
     const obfuscatedCode = obfuscator.obfuscate();
 
     res.json({
       success: true,
       obfuscatedCode: obfuscatedCode,
-      fileName: req.file.originalname
+      fileName: req.file.originalname,
+      originalSize: code.length,
+      obfuscatedSize: obfuscatedCode.length
     });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -71,7 +79,8 @@ app.post('/api/download', (req, res) => {
 app.post('/api/preview', (req, res) => {
   try {
     const { code } = req.body;
-    const obfuscator = new Obfuscator(code, req.body.options || {});
+    const options = req.body.options || {};
+    const obfuscator = new Obfuscator(code, options);
     const obfuscatedCode = obfuscator.obfuscate();
     
     res.json({
@@ -83,6 +92,17 @@ app.post('/api/preview', (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Lua Obfuscator Server running on http://localhost:${PORT}`);
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not found' });
 });
+
+app.listen(PORT, () => {
+  console.log(`
+${'='.repeat(50)}`);
+  console.log(`🚀 Lua Obfuscator Server`);
+  console.log(`✅ Running on http://localhost:${PORT}`);
+  console.log(`${'='.repeat(50)}\n`);
+});
+
+module.exports = app;
