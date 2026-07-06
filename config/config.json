@@ -1,0 +1,19 @@
+{
+  "port": 3000,
+  "host": "localhost",
+  "maxFileSize": 10485760,
+  "obfuscation": {
+    "encryptStrings": true,
+    "obfuscateNames": true,
+    "controlFlow": true,
+    "removeComments": true,
+    "removeWhitespace": true,
+    "junkCodeDensity": 0.7,
+    "encryptionMethod": "aes"
+  },
+  "security": {
+    "enableCORS": true,
+    "corsOrigins": ["*"],
+    "rateLimitPerMinute": 100
+  }
+}

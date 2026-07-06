@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lua Obfuscator - Bảo vệ mã nguồn Lua</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔐 Lua Obfuscator</h1>
+            <p>Bảo vệ mã nguồn Lua với mã hoá chuỗi và che giấu tên</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Panel - Upload & Options -->
+            <div class="left-panel">
+                <div class="upload-section">
+                    <h2>📤 Tải lên File Lua</h2>
+                    <div class="drop-zone" id="dropZone">
+                        <svg class="upload-icon" viewBox="0 0 24 24">
+                            <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2m0 2a8 8 0 100 16 8 8 0 000-16m-1 7V7h2v4h3l-4 4-4-4h3z"/>
+                        </svg>
+                        <p>Kéo thả file Lua vào đây</p>
+                        <p class="or">hoặc</p>
+                        <label for="fileInput" class="btn btn-primary">Chọn file</label>
+                        <input type="file" id="fileInput" accept=".lua" hidden>
+                    </div>
+                </div>
+
+                <div class="options-section">
+                    <h2>⚙️ Tùy chọn</h2>
+                    <label class="checkbox">
+                        <input type="checkbox" id="encryptStrings" checked>
+                        <span>Mã hoá chuỗi</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" id="obfuscateNames" checked>
+                        <span>Làm mờ tên biến/hàm</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" id="controlFlow" checked>
+                        <span>Kiểm soát luồng</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" id="removeComments" checked>
+                        <span>Xoá bình luận</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" id="removeWhitespace" checked>
+                        <span>Xoá khoảng trắng</span>
+                    </label>
+                </div>
+
+                <button id="obfuscateBtn" class="btn btn-success btn-lg" style="display:none;">
+                    🚀 Obfuscate
+                </button>
+
+                <div class="status" id="status"></div>
+            </div>
+
+            <!-- Right Panel - Code Preview -->
+            <div class="right-panel">
+                <div class="code-section">
+                    <div class="code-header">
+                        <h2>👁️ Preview Code</h2>
+                        <button id="copyBtn" class="btn btn-sm" style="display:none;">📋 Copy</button>
+                    </div>
+                    <textarea id="codePreview" readonly placeholder="Mã obfuscate sẽ hiển thị ở đây..."></textarea>
+                </div>
+
+                <button id="downloadBtn" class="btn btn-download btn-lg" style="display:none;">
+                    ⬇️ Tải file Obfuscate
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay" style="display:none;">
+        <div class="spinner"></div>
+        <p>Đang xử lý...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
